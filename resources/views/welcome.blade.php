@@ -102,7 +102,7 @@
               <div class="portfolio-item-caption-content text-center">
                 <i class="fas fa-info-circle fa-10x"></i>
               </div>
-            </div>            
+            </div>
           </div>
         </div>
 
@@ -197,12 +197,12 @@
       </div>
 
       <!-- Contact Section Form -->
-      
+
       <div class="row">
         <div class="col-lg-6 mx-auto">
           <div class="card card-primary">
             <div class="card-header">
-              <h3 class="card-title">Form Aspirasi <i class="fas fa-pen-square float-right"></i></h3>              
+              <h3 class="card-title">Form Aspirasi <i class="fas fa-pen-square float-right"></i></h3>
             </div>
             <form method="post" action="{{ route('complain.store') }}" enctype="multipart/form-data">
             @csrf
@@ -226,10 +226,10 @@
                 </div>
                   <div id="accordion">
                       <div class="card card-danger">
-                          <div class="card-header">                        
+                          <div class="card-header">
                               <a data-toggle="collapse" data-parent="#accordion" href="#collapseTwo">
                               Masukan file jika perlu <i class="fas fa-file-image float-right"></i>
-                              </a>                    
+                              </a>
                           </div>
                           <div id="collapseTwo" class="panel-collapse collapse">
                               <div class="card-body">
@@ -240,7 +240,7 @@
                                               <input class="custom-file-input" type="file" name="file"  id="customFile">
                                               <label class="custom-file-label" for="customFile">Pilih file max : 2mb</label>
                                           </div>
-                                      </div>                                
+                                      </div>
                                   </div>
                               </div>
                           </div>
@@ -272,12 +272,12 @@
                 </div>
               </div>
             </form>
-            <!-- /.card-body -->                        
+            <!-- /.card-body -->
           </div>
           <!-- /.card -->
-        </div>        
-      </div>     
-   
+        </div>
+      </div>
+
   </section>
 
   <!-- Footer -->
@@ -337,7 +337,7 @@
   <!-- Portfolio Modals -->
 
   <!-- Portfolio Modal 1 -->
-  
+
   <div class="portfolio-modal modal fade" id="portfolioModal1" tabindex="-1" role="dialog" aria-labelledby="portfolioModal1Label" aria-hidden="true">
     <div class="modal-dialog modal-xl" role="document">
       <div class="modal-content">
@@ -361,25 +361,25 @@
                 </div>
                 <div class="row">
                   <div class="col-12">
-                    <div class="card">              
+                    <div class="card">
                       <!-- /.card-header -->
                       <div class="card-body table-responsive p-0" style="height: 300px;">
                         @foreach($posts as $row)
-                          <a href="post.html">
+                          <a class="nav-link" href="#portfolio" data-toggle="modal" data-target="#post{{$row->id}}">
                             <h2 class="post-title">
                               {{$row->title}}
                             </h2>
                           </a>
                           <p class="post-subtitle">
                           @if ($row->image === 'noimage.jpg')
-                            {{ substr(strip_tags($row->content),0,50) }}<a href="#">....</a>
+                            {{ substr(strip_tags($row->content),0,50) }} ...
                           @else
-                            {{ substr(strip_tags($row->content),0,50) }}<a href="#">....</a> <i class="fas fa-file-image"></i>
+                            {{ substr(strip_tags($row->content),0,50) }} ... | <i class="fas fa-file-image"></i>
                           @endif
-                          </p>                  
+                          </p>
                           <p class="post-meta">Posted by
-                            <a href="#">{{$row->author}}</a>
-                            {{$row->created_at}}</p>                
+                            <a href="#portfolio">{{$row->author}}</a>
+                            {{ date('F d, Y', strtotime($row->created_at)) }}</p>
                       @endforeach
                       </div>
                       <!-- /.card-body -->
@@ -395,11 +395,11 @@
               </div>
             </div>
           </div>
-        </div>        
+        </div>
       </div>
     </div>
-  </div>        
-  
+  </div>
+
 
   <!-- Portfolio Modal 2 -->
   <div class="portfolio-modal modal fade" id="portfolioModal2" tabindex="-1" role="dialog" aria-labelledby="portfolioModal2Label" aria-hidden="true">
@@ -429,11 +429,11 @@
                   <div class="col-12">
                     <div class="card">
                       <div class="card-header">
-                        <h3 class="card-title">List Semua Masukan</h3>                
+                        <h3 class="card-title">List Semua Masukan</h3>
                       </div>
                       <!-- /.card-header -->
-                                            
-                      <div class="card-body table-responsive p-0" style="height: 300px;">                      
+
+                      <div class="card-body table-responsive p-0" style="height: 300px;">
                         <table class="table table-head-fixed">
                           <thead>
                             <tr>
@@ -447,26 +447,26 @@
                           @foreach ($complaints as $row)
                           <tbody>
                             <tr>
-                              @if ($row->jenis_privasi === 'rahasia')
+                              @if ($row->jenis_privasi === 'anonim')
                                 <td>{{ substr(strip_tags($row->nama),0,2) }}*****</td>
                               @else
                                 <td>{{$row->nama}}</td>
-                              @endif                                                          
+                              @endif
                               <td>{{$row->keterangan}}</td>
-                              <td><a href="#">{{ substr(strip_tags($row->masukan),0,20) }} ....</a></td>
+                              <td><a href="#portfolio" data-toggle="modal" data-target="#aspirasi{{$row->id}}">{{ substr(strip_tags($row->masukan),0,20) }} ....</a></td>
                               <td>{{$row->kategori}}</td>
-                              
+
                               @if ($row->file === 'noimage.jpg')
                                 <td><i class="fas fa-minus"></i></td>
                               @else
                                 <td><i class="fas fa-paperclip"></i></td>
-                              @endif                              
-                              
-                            </tr>                            
+                              @endif
+
+                            </tr>
                           </tbody>
-                          @endforeach 
-                        </table>                        
-                      </div>                          
+                          @endforeach
+                        </table>
+                      </div>
 
                       <!-- /.card-body -->
                     </div>
@@ -513,7 +513,7 @@
                   <div class="col-12">
                     <div class="card">
                       <div class="card-header">
-                        <h3 class="card-title">Fixed Header Table</h3>                
+                        <h3 class="card-title">Fixed Header Table</h3>
                       </div>
                       <!-- /.card-header -->
                       <div class="card-body table-responsive p-0" style="height: 300px;">
@@ -603,7 +603,153 @@
         </div>
       </div>
     </div>
-  </div>  
+  </div>
+
+  <!-- post view -->
+
+  @foreach ($posts as $row)
+  <div class="portfolio-modal modal fade" id="post{{$row->id}}" tabindex="-1" role="dialog" aria-labelledby="portfolioModal3Label" aria-hidden="true">
+    <div class="modal-dialog modal-xl" role="document">
+      <div class="modal-content">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">
+            <i class="fas fa-times"></i>
+          </span>
+        </button>
+        <div class="modal-body">
+          <div class="container">
+            <div class="row justify-content-center">
+              <div class="col-lg-8">
+                <h2 class="portfolio-modal-title text-center text-secondary text-uppercase mb-0">POSTING</h2>
+                <!-- Icon Divider -->
+                <div class="divider-custom">
+                  <div class="divider-custom-line"></div>
+                  <div class="divider-custom-icon">
+                    <i class="fas fa-star"></i>
+                  </div>
+                  <div class="divider-custom-line"></div>
+                </div>
+                <!-- Portfolio Modal - Title -->
+                    <div class="card">
+                      <!-- /.card-header -->
+                      <br>
+                      <br>
+                      <div class="container">
+                        <div class="row">
+                          <div class="col-lg-8 col-md-10 mx-auto">
+                            <div class="post-heading">
+                              <h2>{{$row->title}}</h2>
+                              <span class="meta">Posted by
+                                  <a href="#portfolio">{{$row->author}}</a>
+                                on {{ date('F d, Y', strtotime($row->created_at)) }}</span>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <article>
+                        <div class="container">
+                          <div class="row">
+                            <div class="col-lg-8 col-md-10 mx-auto">
+                                <hr>
+                                <p>{{$row->content}}</p>
+                                <img class="img-fluid" src="{{URL::to('/image/'.$row->image) }}" alt="">
+                            </div>
+                          </div>
+                        </div>
+                      </article>
+
+                      <!-- /.card-body -->
+                    </div>
+
+                <br>
+                <div class="text-center">
+                    <button class="btn btn-primary" href="#" data-dismiss="modal">
+                        <i class="fas fa-times fa-fw"></i>
+                        Close Window
+                    </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  @endforeach
+
+  <!-- aspirasi view -->
+
+  @foreach ($complaints as $row)
+  <div class="portfolio-modal modal fade" id="aspirasi{{$row->id}}" tabindex="-1" role="dialog" aria-labelledby="portfolioModal3Label" aria-hidden="true">
+    <div class="modal-dialog modal-xl" role="document">
+      <div class="modal-content">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">
+            <i class="fas fa-times"></i>
+          </span>
+        </button>
+        <div class="modal-body">
+          <div class="container">
+            <div class="row justify-content-center">
+              <div class="col-lg-8">
+                <h2 class="portfolio-modal-title text-secondary text-center text-uppercase mb-0">Aspirasi</h2>
+                <!-- Icon Divider -->
+                <div class="divider-custom">
+                  <div class="divider-custom-line"></div>
+                  <div class="divider-custom-icon">
+                    <i class="fas fa-star"></i>
+                  </div>
+                  <div class="divider-custom-line"></div>
+                </div>
+                <!-- Portfolio Modal - Title -->
+                    <div class="card">
+                      <!-- /.card-header -->
+                      <br>
+                      <br>
+                      <div class="container">
+                        <div class="row">
+                          <div class="col-lg-8 col-md-10 mx-auto">
+                            <div class="post-heading">
+                              <h2>{{$row->keterangan}}</h2>
+                              <span class="meta">Posted by
+                                  <a href="#portfolio">{{$row->nama}}</a>
+                                on {{ date('F d, Y', strtotime($row->created_at)) }}</span>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <article>
+                        <div class="container">
+                          <div class="row">
+                            <div class="col-lg-8 col-md-10 mx-auto">
+                                <hr>
+                                <p>{{$row->masukan}}</p>
+                                <img class="img-fluid" src="{{URL::to('/file/'.$row->file) }}" alt="">
+                                <p>Aspirasi ini berkategori : {{$row->kategori}}</p>
+                            </div>
+                          </div>
+                        </div>
+                      </article>
+
+                      <!-- /.card-body -->
+                    </div>
+
+                <br>
+                <div class="text-center">
+                    <button class="btn btn-primary" href="#" data-dismiss="modal">
+                        <i class="fas fa-times fa-fw"></i>
+                        Close Window
+                    </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  @endforeach
+
 
   <!-- Bootstrap core JavaScript -->
   <script src="{{asset('index/vendor/jquery/jquery.min.js')}}"></script>

@@ -200,7 +200,7 @@ return [
                 [
                     'text' => 'Aspirasi',
                     'url'  => 'complain',
-                ],                
+                ],                                
                 [
                     'text' => 'Terkonfirmasi',
                     'url'  => '/terkonfirmasi',

@@ -6,7 +6,7 @@
     <h1 class="m-0 text-dark">Aspirasi</h1>
 @stop
 
-@section('content')                
+@section('content')
     <section class="content">
       <div class="row">
         <div class="col-md-6">
@@ -27,40 +27,34 @@
               <!-- /.card-tools -->
             </div>
             <!-- /.card-header -->
-            <div class="card-body p-0">              
+            <div class="card-body p-0">
               <div class="table-responsive mailbox-messages">
                 <table id="example1" class="table table-hover table-striped">
-                @foreach ($complaints as $row)                 
+                @foreach ($masukan as $row)
                  @if ($row->kategori === 'masukan')
-                   <tbody>                                                    
+                   <tbody>
                     <tr>
-                      <td>
-                        <div class="icheck-primary">
-                          <input type="checkbox" value="{{ $row->id }}" id="check1">
-                          <label for="check1"></label>
-                        </div>
-                      </td>
                       {{--  <td class="mailbox-star"><a href="#"><i class="fas fa-star text-warning"></i></a></td>  --}}
                       <td class="mailbox-name"><a href="complain/{{$row->id}}">{{ $row->nama }}</a></td>
-                      <td class="mailbox-subject"><b> {{ $row->keterangan }} </b>,{{ substr(strip_tags($row->masukan),0,100) }} .....
+                      <td class="mailbox-subject"><b> {{ $row->keterangan }} </b>,{{ substr(strip_tags($row->masukan),0,10) }} .....
                       </td>
                       @if ($row->file === 'noimage.jpg')
                       <td class="mailbox-attachment"></td>
                       @else
                       <td class="mailbox-attachment"><i class="fas fa-paperclip"></i></td>
                       @endif
-                      <td class="mailbox-date">{{ substr(strip_tags($row->created_at),0,10) }}</td>
-                    </tr>                  
-                  </tbody> 
-                 @endif                                                                                        
-                @endforeach                  
+                      <td class="mailbox-date">{{ date('d-M-Y', strtotime($row->created_at)) }}</td>
+                    </tr>
+                  </tbody>
+                 @endif
+                @endforeach
                 </table>
                 <!-- /.table -->
               </div>
               <!-- /.mail-box-messages -->
             </div>
-            <!-- /.card-body -->            
-            <div class="card-footer p-0">            
+            <!-- /.card-body -->
+            <div class="card-footer p-0">
               <div class="mailbox-controls">
                 {{--  <!-- Check all button -->
                 <button type="button" class="btn btn-default btn-sm checkbox-toggle"><i class="far fa-square"></i>
@@ -73,7 +67,7 @@
                 <!-- /.btn-group -->
                 <button type="button" class="btn btn-default btn-sm"><i class="fas fa-sync-alt"></i></button>  --}}
                 <div class="float-right">
-                  {{$complaints->links()}}
+                  {{$masukan->links()}}
                 </div>
                 <!-- /.float-right -->
               </div>
@@ -100,40 +94,34 @@
               <!-- /.card-tools -->
             </div>
             <!-- /.card-header -->
-            <div class="card-body p-0">              
+            <div class="card-body p-0">
               <div class="table-responsive mailbox-messages">
                 <table id="example1" class="table table-hover table-striped">
-                @foreach ($complaints as $row)                 
+                @foreach ($keluhan as $row)
                  @if ($row->kategori === 'keluhan')
-                   <tbody>                                                    
+                   <tbody>
                     <tr>
-                      <td>
-                        <div class="icheck-primary">
-                          <input type="checkbox" value="{{ $row->id }}" id="check1">
-                          <label for="check1"></label>
-                        </div>
-                      </td>
                       {{--  <td class="mailbox-star"><a href="#"><i class="fas fa-star text-warning"></i></a></td>  --}}
                       <td class="mailbox-name"><a href="complain/{{$row->id}}">{{ $row->nama }}</a></td>
-                      <td class="mailbox-subject"><b> {{ $row->keterangan }} </b>,{{ substr(strip_tags($row->masukan),0,100) }} .....
+                      <td class="mailbox-subject"><b> {{ $row->keterangan }} </b>,{{ substr(strip_tags($row->masukan),0,10) }} .....
                       </td>
                       @if ($row->file === 'noimage.jpg')
                       <td class="mailbox-attachment"></td>
                       @else
                       <td class="mailbox-attachment"><i class="fas fa-paperclip"></i></td>
                       @endif
-                      <td class="mailbox-date">{{ substr(strip_tags($row->created_at),0,10) }}</td>
-                    </tr>                  
-                  </tbody> 
-                 @endif                                                                                        
-                @endforeach                  
+                      <td class="mailbox-date">{{ date('d-M-Y', strtotime($row->created_at)) }}</td>
+                    </tr>
+                  </tbody>
+                 @endif
+                @endforeach
                 </table>
                 <!-- /.table -->
               </div>
               <!-- /.mail-box-messages -->
             </div>
-            <!-- /.card-body -->            
-            <div class="card-footer p-0">            
+            <!-- /.card-body -->
+            <div class="card-footer p-0">
               <div class="mailbox-controls">
                 {{--  <!-- Check all button -->
                 <button type="button" class="btn btn-default btn-sm checkbox-toggle"><i class="far fa-square"></i>
@@ -146,7 +134,7 @@
                 <!-- /.btn-group -->
                 <button type="button" class="btn btn-default btn-sm"><i class="fas fa-sync-alt"></i></button>  --}}
                 <div class="float-right">
-                  {{$complaints->links()}}
+                  {{$keluhan->links()}}
                 </div>
                 <!-- /.float-right -->
               </div>
@@ -157,5 +145,5 @@
         <!-- /.col -->
       </div>
       <!-- /.row -->
-    </section>        
+    </section>
 @stop

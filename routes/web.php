@@ -14,6 +14,10 @@
 Route::get('/', 'PostController@index')->name('welcome');
 Route::resource('/complain', 'ComplaintsController');
 
+Route::get('/viewpost', function () {
+    return view('post');
+});
+
 Route::get('/tambah-admin', function () {
     return view('admin.createadmin');
 });
@@ -33,7 +37,8 @@ Route::get('/terkonfirmasi', function () {
 Auth::routes();
 
 
-Route::get('complain', 'ComplaintsController@index')->middleware('auth');
+Route::get('complain/masukan', 'ComplaintsController@masukan')->name('complain.masukan')->middleware('auth');
+Route::get('complain/keluhan', 'ComplaintsController@keluhan')->name('complain.keluhan')->middleware('auth');
 Route::get('complain/{complaint}', 'ComplaintsController@show')->middleware('auth');
 
 
@@ -43,6 +48,6 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 Auth::routes();
 
-Route::get('/home', function() {
-    return view('home');
-})->name('home')->middleware('auth');
+// Route::get('/home', function() {
+//     return view('home');
+// })->name('home')->middleware('auth');

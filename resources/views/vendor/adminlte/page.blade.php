@@ -2,6 +2,11 @@
 
 @section('adminlte_css')
     @stack('css')
+    <style>
+        .is-complete{
+            text-decoration: line-through;
+        }
+    </style>
     @yield('css')
 @stop
 
@@ -94,37 +99,30 @@
                 </ul>
             @endif
                 <ul class="navbar-nav ml-auto @if(config('adminlte.layout_topnav') || View::getSection('layout_topnav'))order-1 order-md-3 navbar-no-expand @endif">
-                    @yield('content_top_nav_right')                        
+                    @yield('content_top_nav_right')
 
-                        <li class="nav-item dropdown">
-                            <a class="nav-link" data-toggle="dropdown" href="#">
-                                <i class="far fa-bell"></i>
-                                <span class="badge badge-warning navbar-badge">15</span>
-                            </a>
-                            <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
-                                <span class="dropdown-item dropdown-header">15 Notifications</span>
-                                <div class="dropdown-divider"></div>
-                                <a href="#" class="dropdown-item">
-                                    <i class="fas fa-envelope mr-2"></i> 4 new messages
-                                    <span class="float-right text-muted text-sm">3 mins</span>
-                                </a>
-                                <div class="dropdown-divider"></div>
-                                <a href="#" class="dropdown-item">
-                                    <i class="fas fa-users mr-2"></i> 8 friend requests
-                                    <span class="float-right text-muted text-sm">12 hours</span>
-                                </a>
-                                <div class="dropdown-divider"></div>
-                                <a href="#" class="dropdown-item">
-                                    <i class="fas fa-file mr-2"></i> 3 new reports
-                                    <span class="float-right text-muted text-sm">2 days</span>
-                                </a>
-                                <div class="dropdown-divider"></div>
-                                <a href="#" class="dropdown-item dropdown-footer">See All Notifications</a>
+                    <li class="nav-item dropdown dropdown-notifications">
+                        <a class="nav-link" data-toggle="dropdown" href="#notifications-panel">
+                            <i data-count="0" class="far fa-bell"></i>
+                            <span class="badge badge-warning navbar-badge notif-count" data-count="0"></span>
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
+                            <span class="dropdown-item dropdown-header">(<span class="notif-count">0</span>) Notifications</span>
+
+                            <div class="notification-active">
                             </div>
-                        </li>                        
-                    
+                        </div>
+                    </li>
+
+                    {{--  <div class=" header">
+                        <a class="nav-link" data-hotkey="g n" data-ga-click="Header, go to notifications, icon::read" data-channel="my-channel" href="#notifications-panel">
+                            <i data-count="0" class="far fa-bell"></i>
+                            <span class="badge badge-info navbar-badge notif-count" data-count="0"></span>
+                        </a>
+                    </div>  --}}
+
                     @if(Auth::user())
-                        <li class="nav-item dropdown">
+                            <li class="nav-item dropdown">
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                                     {{ Auth::user()->name }} <span class="caret"></span>
                                 </a>
@@ -202,7 +200,6 @@
 
         @hasSection('footer')
         <footer class="main-footer">
-
             @yield('footer')
         </footer>
         @endif
@@ -213,6 +210,15 @@
             </aside>
         @endif
 
+        @yield('postview')
+
+        @yield('delete')
+
+        @yield('edit')
+
+        @yield('delimg')
+
+
     </div>
 @stop
 
@@ -221,7 +227,16 @@
     <script src="{{ asset('js/chart.js') }}"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
     <script src="//js.pusher.com/3.1/pusher.min.js"></script>
-    <script src="{{ asset('js/notif.js') }}"></script>
+    <script src="https://js.pusher.com/5.0/pusher.min.js"></script>
+    <script src="{{asset('js/notifications.js')}}"></script>
+    <script>
+        $('#file').on('change',function(){
+            //get the file name
+            var fileName = $(this).val();
+            //replace the "Choose a file" label
+            $(this).next('.custom-file-label').html(fileName);
+        })
+    </script>
     @stack('js')
     @yield('js')
 @stop

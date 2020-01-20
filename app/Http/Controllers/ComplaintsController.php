@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Complaint;
+use App\Task;
 
 class ComplaintsController extends Controller
 {
@@ -12,12 +13,14 @@ class ComplaintsController extends Controller
 
         $masukan = DB::table('complaints')->where('kategori', 'masukan')->orderBy('created_at','desc')->paginate(10);
         $keluhan = DB::table('complaints')->where('kategori', 'keluhan')->orderBy('created_at','desc')->paginate(10);
-        return view('admin.masukan', ['masukan' => $masukan, 'keluhan' => $keluhan]);
+        $tasks = Task::all();
+        return view('admin.masukan', ['masukan' => $masukan, 'keluhan' => $keluhan, 'tasks'=>$tasks]);
     }
 
     public function show($id){
         $complaints = DB::table('complaints')->where('id',$id)->get()->groupBy('complaints');
-        return view('admin.views',['complaints'=> $complaints]);
+        $tasks = Task::where('complaint_id', $id)->get();
+        return view('admin.views',['complaints'=> $complaints, 'tasks'=>$tasks]);
     }
 
     public function create(){

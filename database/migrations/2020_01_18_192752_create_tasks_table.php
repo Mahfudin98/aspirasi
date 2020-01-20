@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateConfirmationsTable extends Migration
+class CreateTasksTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,12 @@ class CreateConfirmationsTable extends Migration
      */
     public function up()
     {
-        Schema::create('confirmations', function (Blueprint $table) {
-            $table->Increments('id');
+        Schema::create('tasks', function (Blueprint $table) {
+            $table->bigIncrements('id');
             $table->unsignedBigInteger('complaint_id');
-            $table->foreign('complaint_id')->references('id')->on('complaints')->onDelet('cascade');
-            $table->string('response')->nullable();
+            $table->string('nama');
+            $table->text('masukan');
+            $table->boolean('completed')->default(false);
             $table->timestamps();
         });
     }
@@ -29,6 +30,6 @@ class CreateConfirmationsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('confirmations');
+        Schema::dropIfExists('tasks');
     }
 }

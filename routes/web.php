@@ -18,22 +18,6 @@ Route::get('/viewpost', function () {
     return view('post');
 });
 
-Route::get('/tambah-admin', function () {
-    return view('admin.createadmin');
-});
-
-Route::get('/list-admin', function () {
-    return view('admin.listadmin');
-});
-
-Route::get('/ubah-password', function () {
-    return view('admin.ubahpassword');
-});
-
-Route::get('/terkonfirmasi', function () {
-    return view('admin.terkonfirmasi');
-});
-
 Auth::routes();
 
 
@@ -44,7 +28,23 @@ Route::get('complain/{complaint}', 'ComplaintsController@show')->middleware('aut
 
 Route::resource('/post', 'PostController');
 
-Route::get('/home', 'HomeController@index')->name('home');
+// Route::get('/home', 'HomeController@index')->name('home');
+// Route::delete('/posts/{id}', 'HomeController@destroy');
+Route::get('test', function () {
+    event(new App\Events\ComplaintNotif('Someone'));
+    return "Event has been sent!";
+});
+Route::get('/coba', function(){
+    return view("test");
+});
+
+
+Route::get('/terkonfirmasi', 'ComplaintTaskController@index')->name('terkonfirmasi');
+Route::patch('/terkonfirmasi/{task}', 'ComplaintTaskController@update');
+
+Route::post('/complaint/{complaint}/tasks', 'ComplaintTaskController@store');
+Route::resource('/home', 'HomeController');
+Route::delete('/img/{id}', 'HomeController@img');
 
 Auth::routes();
 

@@ -6,19 +6,22 @@ use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
+use App\Complaint;
 
 class ComplaintPaid extends Notification
 {
     use Queueable;
+
+    public $complaint;
 
     /**
      * Create a new notification instance.
      *
      * @return void
      */
-    public function __construct()
+    public function __construct(Complaint $complaint)
     {
-        //
+        $this->complaint = $complaint;
     }
 
     /**
@@ -29,7 +32,8 @@ class ComplaintPaid extends Notification
      */
     public function via($notifiable)
     {
-        return ['mail'];
+        // return ['mail'];
+        return ['database'];
     }
 
     /**
@@ -56,6 +60,15 @@ class ComplaintPaid extends Notification
     {
         return [
             //
+        ];
+    }
+
+    public function toDatabase($notifiable){
+        return [
+            $this->complaint->id,
+            $this->complaint->nama,
+            $this->complaint->masukan,
+            $this->complaint->kategori
         ];
     }
 }

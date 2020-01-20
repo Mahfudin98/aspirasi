@@ -31,7 +31,25 @@
 
           @foreach ($complaints as $row)
             @if ($row[0]->kategori === 'masukan')
+
                 <div class="card card-primary card-outline">
+                    @foreach ($tasks as $item)
+                        @if ($item->complaint_id == $row[0]->id)
+                        @if ($item->completed == true)
+                          <div class="ribbon-wrapper ribbon-xl">
+                            <div class="ribbon bg-success text-xl">
+                              Completed
+                            </div>
+                          </div>
+                        @else
+                        <div class="ribbon-wrapper ribbon-xl">
+                            <div class="ribbon bg-danger text-xl">
+                              Proses
+                            </div>
+                        </div>
+                        @endif
+                        @endif
+                    @endforeach
                     <div class="card-header">
                     <h3 class="card-title">Read Mail</h3>
 
@@ -52,14 +70,14 @@
                         <div class="btn-group">
                         <button type="button" class="btn btn-default btn-sm" data-toggle="tooltip" data-container="body" title="Delete">
                             <i class="far fa-trash-alt"></i></button>
-                        <button type="button" class="btn btn-default btn-sm" data-toggle="tooltip" data-container="body" title="Reply">
-                            <i class="fas fa-reply"></i></button>
-                        <button type="button" class="btn btn-default btn-sm" data-toggle="tooltip" data-container="body" title="Forward">
-                            <i class="fas fa-share"></i></button>
-                        </div>
-                        <!-- /.btn-group -->
-                        <button type="button" class="btn btn-default btn-sm" data-toggle="tooltip" title="Print">
-                        <i class="fas fa-print"></i></button>
+                        <form action="/complaint/{{$row[0]->id}}/tasks" method="post">
+                            @csrf
+                            <input type="hidden" value="{{ $row[0]->nama }}" name="nama">
+                            <input type="hidden" value="{{ $row[0]->masukan }}" name="masukan">
+                            <button type="submit" class="btn btn-default btn-sm" title="proses {{ $row[0]->kategori }}">
+                                Proses {{ $row[0]->kategori }} <span><i class="fas fa-hourglass"></i></span>
+                            </button>
+                        </form>
                     </div>
                     <!-- /.mailbox-controls -->
                     <div class="mailbox-read-message">
@@ -100,6 +118,23 @@
                 </div>
             @else
                 <div class="card card-primary card-outline">
+                    @foreach ($tasks as $item)
+                        @if ($item->complaint_id == $row[0]->id)
+                        @if ($item->completed == true)
+                          <div class="ribbon-wrapper ribbon-xl">
+                            <div class="ribbon bg-success text-xl">
+                              Completed
+                            </div>
+                          </div>
+                        @else
+                        <div class="ribbon-wrapper ribbon-xl">
+                            <div class="ribbon bg-danger text-xl">
+                              Proses
+                            </div>
+                        </div>
+                        @endif
+                        @endif
+                    @endforeach
                     <div class="card-header">
                     <h3 class="card-title">Read Mail</h3>
 
@@ -120,14 +155,14 @@
                         <div class="btn-group">
                         <button type="button" class="btn btn-default btn-sm" data-toggle="tooltip" data-container="body" title="Delete">
                             <i class="far fa-trash-alt"></i></button>
-                        <button type="button" class="btn btn-default btn-sm" data-toggle="tooltip" data-container="body" title="Reply">
-                            <i class="fas fa-reply"></i></button>
-                        <button type="button" class="btn btn-default btn-sm" data-toggle="tooltip" data-container="body" title="Forward">
-                            <i class="fas fa-share"></i></button>
-                        </div>
-                        <!-- /.btn-group -->
-                        <button type="button" class="btn btn-default btn-sm" data-toggle="tooltip" title="Print">
-                        <i class="fas fa-print"></i></button>
+                        <form action="/complaint/{{$row[0]->id}}/tasks" method="post">
+                            @csrf
+                            <input type="hidden" value="{{ $row[0]->nama }}" name="nama">
+                            <input type="hidden" value="{{ $row[0]->masukan }}" name="masukan">
+                            <button type="submit" class="btn btn-default btn-sm" title="proses {{ $row[0]->kategori }}">
+                                Proses {{ $row[0]->kategori }} <span><i class="fas fa-hourglass"></i></span>
+                            </button>
+                        </form>
                     </div>
                     <!-- /.mailbox-controls -->
                     <div class="mailbox-read-message">

@@ -410,12 +410,12 @@
             <i class="fas fa-times"></i>
           </span>
         </button>
-        <div class="modal-body text-center">
+        <div class="modal-body">
           <div class="container">
             <div class="row justify-content-center">
               <div class="col-lg-8">
                 <!-- Portfolio Modal - Title -->
-                <h2 class="portfolio-modal-title text-secondary text-uppercase mb-0">Aspirasi</h2>
+                <h2 class="portfolio-modal-title text-secondary text-center text-uppercase mb-0">Aspirasi</h2>
                 <!-- Icon Divider -->
                 <div class="divider-custom">
                   <div class="divider-custom-line"></div>
@@ -428,8 +428,8 @@
                 <div class="row">
                   <div class="col-12">
                     <div class="card">
-                      <div class="card-header">
-                        <h3 class="card-title">List Semua Masukan</h3>
+                      <div class="card-header text-center">
+                        <h3 class="card-title">List Masukan Terbaru</h3>
                       </div>
                       <!-- /.card-header -->
 
@@ -474,10 +474,12 @@
                   </div>
                 </div>
                 <br>
-                <button class="btn btn-primary" href="#" data-dismiss="modal">
-                  <i class="fas fa-times fa-fw"></i>
-                  Close Window
-                </button>
+                <div class="text-center">
+                    <button class="btn btn-primary" href="#" data-dismiss="modal">
+                        <i class="fas fa-times fa-fw"></i>
+                        Close Window
+                    </button>
+                </div>
               </div>
             </div>
           </div>
@@ -513,77 +515,43 @@
                   <div class="col-12">
                     <div class="card">
                       <div class="card-header">
-                        <h3 class="card-title">Fixed Header Table</h3>
+                        <h3 class="card-title">List Aspirasi yang Terkonfirmasi</h3>
                       </div>
                       <!-- /.card-header -->
                       <div class="card-body table-responsive p-0" style="height: 300px;">
                         <table class="table table-head-fixed">
                           <thead>
                             <tr>
-                              <th>ID</th>
-                              <th>User</th>
-                              <th>Date</th>
+                              <th>Nama</th>
+                              <th style="width: 50%">Masukan</th>
                               <th>Status</th>
-                              <th>Reason</th>
+                              <th>Keterangan</th>
                             </tr>
                           </thead>
                           <tbody>
-                            <tr>
-                              <td>183</td>
-                              <td>John Doe</td>
-                              <td>11-7-2014</td>
-                              <td><span class="tag tag-success">Approved</span></td>
-                              <td>Bacon ipsum dolor sit amet salami venison chicken flank fatback doner.</td>
-                            </tr>
-                            <tr>
-                              <td>219</td>
-                              <td>Alexander Pierce</td>
-                              <td>11-7-2014</td>
-                              <td><span class="tag tag-warning">Pending</span></td>
-                              <td>Bacon ipsum dolor sit amet salami venison chicken flank fatback doner.</td>
-                            </tr>
-                            <tr>
-                              <td>657</td>
-                              <td>Bob Doe</td>
-                              <td>11-7-2014</td>
-                              <td><span class="tag tag-primary">Approved</span></td>
-                              <td>Bacon ipsum dolor sit amet salami venison chicken flank fatback doner.</td>
-                            </tr>
-                            <tr>
-                              <td>175</td>
-                              <td>Mike Doe</td>
-                              <td>11-7-2014</td>
-                              <td><span class="tag tag-danger">Denied</span></td>
-                              <td>Bacon ipsum dolor sit amet salami venison chicken flank fatback doner.</td>
-                            </tr>
-                            <tr>
-                              <td>134</td>
-                              <td>Jim Doe</td>
-                              <td>11-7-2014</td>
-                              <td><span class="tag tag-success">Approved</span></td>
-                              <td>Bacon ipsum dolor sit amet salami venison chicken flank fatback doner.</td>
-                            </tr>
-                            <tr>
-                              <td>494</td>
-                              <td>Victoria Doe</td>
-                              <td>11-7-2014</td>
-                              <td><span class="tag tag-warning">Pending</span></td>
-                              <td>Bacon ipsum dolor sit amet salami venison chicken flank fatback doner.</td>
-                            </tr>
-                            <tr>
-                              <td>832</td>
-                              <td>Michael Doe</td>
-                              <td>11-7-2014</td>
-                              <td><span class="tag tag-primary">Approved</span></td>
-                              <td>Bacon ipsum dolor sit amet salami venison chicken flank fatback doner.</td>
-                            </tr>
-                            <tr>
-                              <td>982</td>
-                              <td>Rocky Doe</td>
-                              <td>11-7-2014</td>
-                              <td><span class="tag tag-danger">Denied</span></td>
-                              <td>Bacon ipsum dolor sit amet salami venison chicken flank fatback doner.</td>
-                            </tr>
+                            {{--  @if ($tasks->complaints->count())  --}}
+                                @foreach ($tasks as $row)
+                                    <tr>
+                                    <td class=" text-justify">{{ substr(strip_tags($row->nama),0,10) }} .....</td>
+                                    <td class=" text-justify">{{ substr(strip_tags($row->masukan),0,85) }} .....</td>
+                                    @if ($row->completed == true)
+                                    <td>
+                                        <div class="progress progress-xs">
+                                          <div class="progress-bar progress-bar-danger" style="width: 100%"></div>
+                                        </div>
+                                    </td>
+                                    <td><span class="badge bg-success">Completed</span></td>
+                                    @else
+                                    <td>
+                                        <div class="progress progress-xs">
+                                          <div class="progress-bar progress-bar-danger" style="width: 50%"></div>
+                                        </div>
+                                    </td>
+                                    <td><span class="badge bg-warning">progress</span></td>
+                                    @endif
+                                    </tr>
+                                @endforeach
+                            {{--  @endif  --}}
                           </tbody>
                         </table>
                       </div>
@@ -610,7 +578,7 @@
   @foreach ($posts as $row)
   <div class="portfolio-modal modal fade" id="post{{$row->id}}" tabindex="-1" role="dialog" aria-labelledby="portfolioModal3Label" aria-hidden="true">
     <div class="modal-dialog modal-xl" role="document">
-      <div class="modal-content">
+      <div class="modal-content bg-info">
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">
             <i class="fas fa-times"></i>
@@ -663,7 +631,7 @@
 
                 <br>
                 <div class="text-center">
-                    <button class="btn btn-primary" href="#" data-dismiss="modal">
+                    <button class="btn btn-danger" href="#" data-dismiss="modal">
                         <i class="fas fa-times fa-fw"></i>
                         Close Window
                     </button>
@@ -682,7 +650,7 @@
   @foreach ($complaints as $row)
   <div class="portfolio-modal modal fade" id="aspirasi{{$row->id}}" tabindex="-1" role="dialog" aria-labelledby="portfolioModal3Label" aria-hidden="true">
     <div class="modal-dialog modal-xl" role="document">
-      <div class="modal-content">
+      <div class="modal-content bg-info">
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">
             <i class="fas fa-times"></i>
@@ -710,10 +678,20 @@
                         <div class="row">
                           <div class="col-lg-8 col-md-10 mx-auto">
                             <div class="post-heading">
-                              <h2>{{$row->keterangan}}</h2>
-                              <span class="meta">Posted by
-                                  <a href="#portfolio">{{$row->nama}}</a>
-                                on {{ date('F d, Y', strtotime($row->created_at)) }}</span>
+                              <p>Keterangan pembuat Aspirasi : <b>{{$row->keterangan}}</b></p>
+
+                              @if ($row->jenis_privasi === 'umum')
+                                <span class="meta">Nama Pembuat
+                                    <a href="#portfolio">{{$row->nama}}</a>
+                                    on {{ date('F d, Y', strtotime($row->created_at)) }}
+                                </span>
+                              @else
+                                <span class="meta">Nama Pembuat
+                                    <a href="#portfolio">{{ substr(strip_tags($row->nama),0,2) }}*****</a>
+                                    (Privasi Anonim) on {{ date('F d, Y', strtotime($row->created_at)) }}
+                                </span>
+                              @endif
+
                             </div>
                           </div>
                         </div>
@@ -736,7 +714,7 @@
 
                 <br>
                 <div class="text-center">
-                    <button class="btn btn-primary" href="#" data-dismiss="modal">
+                    <button class="btn btn-danger" href="#" data-dismiss="modal">
                         <i class="fas fa-times fa-fw"></i>
                         Close Window
                     </button>

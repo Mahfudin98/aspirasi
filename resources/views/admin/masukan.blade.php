@@ -35,15 +35,26 @@
                    <tbody>
                     <tr>
                       {{--  <td class="mailbox-star"><a href="#"><i class="fas fa-star text-warning"></i></a></td>  --}}
-                      <td class="mailbox-name"><a href="complain/{{$row->id}}">{{ $row->nama }}</a></td>
-                      <td class="mailbox-subject"><b> {{ $row->keterangan }} </b>,{{ substr(strip_tags($row->masukan),0,10) }} .....
+                      <td class="mailbox-name"><a href="complain/{{$row->id}}">
+                        {{ $row->nama }}</a></td>
+                      <td class="mailbox-subject"><b> {{ $row->keterangan }} </b>,{{ substr(strip_tags($row->masukan),0,20) }} .....</td>
+                      <td>
+                        @foreach ($tasks as $item)
+                            @if ($item->complaint_id == $row->id)
+                            @if ($item->completed == true)
+                            <span class="badge bg-success">Completed</span>
+                            @else
+                            <span class="badge bg-danger">Proses</span>
+                            @endif
+                            @endif
+                        @endforeach
                       </td>
                       @if ($row->file === 'noimage.jpg')
                       <td class="mailbox-attachment"></td>
                       @else
                       <td class="mailbox-attachment"><i class="fas fa-paperclip"></i></td>
                       @endif
-                      <td class="mailbox-date">{{ date('d-M-Y', strtotime($row->created_at)) }}</td>
+                      <td class="mailbox-date">{{ date('d,M,Y', strtotime($row->created_at)) }}</td>
                     </tr>
                   </tbody>
                  @endif
@@ -103,14 +114,25 @@
                     <tr>
                       {{--  <td class="mailbox-star"><a href="#"><i class="fas fa-star text-warning"></i></a></td>  --}}
                       <td class="mailbox-name"><a href="complain/{{$row->id}}">{{ $row->nama }}</a></td>
-                      <td class="mailbox-subject"><b> {{ $row->keterangan }} </b>,{{ substr(strip_tags($row->masukan),0,10) }} .....
+                      <td class="mailbox-subject"><b> {{ $row->keterangan }} </b>,{{ substr(strip_tags($row->masukan),0,20) }} .....
+                      </td>
+                      <td>
+                        @foreach ($tasks as $item)
+                            @if ($item->complaint_id == $row->id)
+                            @if ($item->completed == true)
+                            <span class="badge bg-success">Completed</span>
+                            @else
+                            <span class="badge bg-danger">Proses</span>
+                            @endif
+                            @endif
+                        @endforeach
                       </td>
                       @if ($row->file === 'noimage.jpg')
                       <td class="mailbox-attachment"></td>
                       @else
                       <td class="mailbox-attachment"><i class="fas fa-paperclip"></i></td>
                       @endif
-                      <td class="mailbox-date">{{ date('d-M-Y', strtotime($row->created_at)) }}</td>
+                      <td class="mailbox-date">{{ date('d,M,Y', strtotime($row->created_at)) }}</td>
                     </tr>
                   </tbody>
                  @endif

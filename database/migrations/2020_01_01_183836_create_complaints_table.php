@@ -14,9 +14,9 @@ class CreateComplaintsTable extends Migration
     public function up()
     {
         Schema::create('complaints', function (Blueprint $table) {
-            $table->Increments('id');
+            $table->bigIncrements('id');
             $table->string('nama');
-            $table->enum('keterangan',['mahasiswa', 'dosen', 'umum']);
+            $table->enum('keterangan',['mahasiswa', 'umum']);
             $table->string('email');
             $table->string('file')->nullable();
             $table->text('masukan');

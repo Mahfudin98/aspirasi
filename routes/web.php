@@ -38,7 +38,7 @@ Route::get('/coba', function(){
     return view("test");
 });
 
-
+Route::get('/notif', 'ComplaintsController@notif');
 Route::get('/terkonfirmasi', 'ComplaintTaskController@index')->name('terkonfirmasi');
 Route::patch('/terkonfirmasi/{task}', 'ComplaintTaskController@update');
 

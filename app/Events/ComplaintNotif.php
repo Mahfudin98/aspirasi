@@ -14,19 +14,16 @@ class ComplaintNotif
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
-    public $username;
-
-    public $message;
+    public $complaint;
 
     /**
      * Create a new event instance.
      *
      * @return void
      */
-    public function __construct($username)
+    public function __construct($complaint)
     {
-        $this->username = $username;
-        $this->message  = "{$username} liked your status";
+        $this->complaint = $complaint;
     }
 
     /**
@@ -36,7 +33,7 @@ class ComplaintNotif
      */
     public function broadcastOn()
     {
-        // return new PrivateChannel('my-channel');
+        // return new PrivateChannel('complaint'.$this->complaint->id);
         return ['my-channel'];
     }
 

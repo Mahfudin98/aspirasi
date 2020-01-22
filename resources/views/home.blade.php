@@ -53,6 +53,7 @@
             </div>
           </div>
           <!-- ./col -->
+
           <div class="col-lg-3 col-6">
             <!-- small box -->
             <div class="small-box bg-danger">
@@ -73,63 +74,6 @@
         <div class="container-fluid">
           <div class="row">
             <div class="col-md-6">
-              <div class="card card-success">
-                <div class="card-header">
-                  <h3 class="card-title">Buat Postingan</h3>
-                  <div class="card-tools">
-                    <button type="button" class="btn btn-tool" data-card-widget="collapse">
-                      <i class="fas fa-pen float-right"></i>
-                    </button>
-                  </div>
-                </div>
-                <div class="card-body">
-                  <form method="post" action="{{ route('home.store')}}" enctype="multipart/form-data">
-                  @csrf
-                    <div class="card-body">
-                      <div class="form-group">
-                        <label for="inputName">Title</label>
-                        <input type="text" name="title" id="inputName" class="form-control" required>
-                      </div>
-                        <div id="accordion">
-                            <div class="card card-success">
-                                <div class="card-header">
-                                    <a data-toggle="collapse" data-parent="#accordion" href="#collapseTwo">
-                                    Masukan Gambar jika perlu <i class="fas fa-file-image float-right"></i>
-                                    </a>
-                                </div>
-                                <div id="collapseTwo" class="panel-collapse collapse">
-                                    <div class="card-body">
-                                        <div class="form-group">
-                                        <label>Masukan Gambar disini :</label>
-                                            <div class="input-group">
-                                                <div class="custom-file">
-                                                    <input class="custom-file-input" type="file" name="image"  id="file">
-                                                    <label class="custom-file-label" for="file">Pilih Gambar max : 2mb</label>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                      <div class="form-group">
-                        <label for="inputDescription">Content</label>
-                        <textarea id="inputDescription" name="content" class="form-control" rows="4" required></textarea>
-                      </div>
-                      <div class="form-group">
-                        <label for="inputName">Author</label>
-                        <input type="text" id="inputName" class="form-control" name="author" value="{{ Auth::user()->name }}" required>
-                      </div>
-                      <div class="form-group">
-                        <input type="submit" name="kirim" value="Kirimkan!" class="btn btn-success float-right">
-                      </div>
-                    </div>
-                  </form>
-                </div>
-                <!-- /.card-body -->
-              </div>
-            </div>
-            <div class="col-md-6">
               <div class="card card-info">
                 <div class="card-header">
                   <h3 class="card-title">List Postingan</h3>
@@ -145,7 +89,7 @@
                         <div class="col-12">
                           <div class="card">
                             <!-- /.card-header -->
-                            <div class="card-body table-responsive p-0" style="height: 457px;">
+                            <div class="card-body table-responsive p-0" style="height: 782px;">
                               @foreach($posts as $row)
                                 <a class="nav-link" href="#portfolio" data-toggle="modal" data-target="#post{{$row->id}}">
                                   <h2 class="post-title">
@@ -173,7 +117,102 @@
                 <!-- /.card-body -->
               </div>
             </div>
-          </div>
+
+              <div class="col-md-6">
+                <div class="card card-warning">
+                    <div class="card-header">
+                      <h3 class="card-title">Aspirasi Masuk Terbaru</h3>
+
+                      <div class="card-tools">
+                        <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                          <i class="fas fa-bell"></i>
+                        </button>
+                      </div>
+                    </div>
+                    <!-- /.card-header -->
+                    <div class="card-body p-0">
+                      <ul class="products-list product-list-in-card pl-2 pr-2">
+                          @foreach ($complaint as $row)
+                          <li class="item">
+                            <div class="product-img">
+                                <i class="fas fa-file mr-2 size-50"></i>
+                              {{--  <img src="dist/img/default-150x150.png" alt="Product Image" class="img-size-50">  --}}
+                            </div>
+                            <div class="product-info">
+                              <a href="javascript:void(0)" class="product-title">{{$row->data['nama']}}
+                                <span class="badge badge-warning float-right">{{$row->data['kategori']}}</span></a>
+                              <span class="product-description">
+                                {{$row->data['masukan']}}
+                              </span>
+                            </div>
+                          </li>
+                          @endforeach
+                        <!-- /.item -->
+                      </ul>
+                    </div>
+                    <!-- /.card-body -->
+                    <div class="card-footer text-center">
+                      <a href="javascript:void(0)" class="uppercase">View All Products</a>
+                    </div>
+                    <!-- /.card-footer -->
+                  </div>
+                <div class="card card-success">
+                  <div class="card-header">
+                    <h3 class="card-title">Buat Postingan</h3>
+                    <div class="card-tools">
+                      <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                        <i class="fas fa-pen float-right"></i>
+                      </button>
+                    </div>
+                  </div>
+                  <div class="card-body">
+                    <form method="post" action="{{ route('home.store')}}" enctype="multipart/form-data">
+                    @csrf
+                      <div class="card-body">
+                        <div class="form-group">
+                          <label for="inputName">Title</label>
+                          <input type="text" name="title" id="inputName" class="form-control" required>
+                        </div>
+                          <div id="accordion">
+                              <div class="card card-success">
+                                  <div class="card-header">
+                                      <a data-toggle="collapse" data-parent="#accordion" href="#collapseTwo">
+                                      Masukan Gambar jika perlu <i class="fas fa-file-image float-right"></i>
+                                      </a>
+                                  </div>
+                                  <div id="collapseTwo" class="panel-collapse collapse">
+                                      <div class="card-body">
+                                          <div class="form-group">
+                                          <label>Masukan Gambar disini :</label>
+                                              <div class="input-group">
+                                                  <div class="custom-file">
+                                                      <input class="custom-file-input" type="file" name="image"  id="file">
+                                                      <label class="custom-file-label" for="file">Pilih Gambar max : 2mb</label>
+                                                  </div>
+                                              </div>
+                                          </div>
+                                      </div>
+                                  </div>
+                              </div>
+                          </div>
+                        <div class="form-group">
+                          <label for="inputDescription">Content</label>
+                          <textarea id="inputDescription" name="content" class="form-control" rows="4" required></textarea>
+                        </div>
+                        <div class="form-group">
+                          <label for="inputName">Author</label>
+                          <input type="text" id="inputName" class="form-control" name="author" value="{{ Auth::user()->name }}" required>
+                        </div>
+                        <div class="form-group">
+                          <input type="submit" name="kirim" value="Kirimkan!" class="btn btn-success float-right">
+                        </div>
+                      </div>
+                    </form>
+                  </div>
+                  <!-- /.card-body -->
+                </div>
+              </div>
+           </div>
         </div>
       </section>
 @stop

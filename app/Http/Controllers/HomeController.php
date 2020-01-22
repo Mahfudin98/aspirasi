@@ -4,7 +4,10 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Post;
+use App\Complaint;
+use App\Notifications\ComplaintPaid;
 use Illuminate\Support\Facades\DB;
+use App\Notification;
 
 class HomeController extends Controller
 {
@@ -26,7 +29,8 @@ class HomeController extends Controller
     public function index()
     {
         $posts = DB::table('posts')->orderBy('created_at','desc')->paginate(10);
-        return view('home', ['posts' => $posts]);
+        $complaint = Notification::orderBy('created_at','desc')->paginate(3);
+        return view('home', ['posts' => $posts, 'complaint' => $complaint]);
     }
 
     public function create(){

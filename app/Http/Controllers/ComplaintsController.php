@@ -6,6 +6,10 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Complaint;
 use App\Task;
+use App\Events\ComplaintNotif;
+use App\Notifications\ComplaintPaid;
+use App\Notification;
+use Mockery\Matcher\Not;
 
 class ComplaintsController extends Controller
 {
@@ -63,8 +67,26 @@ class ComplaintsController extends Controller
             'kategori'       => $request->kategori
          );
 
-         Complaint::create($form_data);
+         $complaint = Complaint::create($form_data);
+
+         $complaint->notify(new ComplaintPaid($complaint));
+
+         event(new ComplaintNotif($complaint));
 
          return redirect('/');
+    }
+
+    public function notif(){
+        $notif = Notification::all();
+        // $complaint = Complaint::find('id');
+
+        // $complaint->notify(new ComplaintPaid($complaint));
+        // // $complaint->unreadNotifications->markAsRead();
+
+        // // return 'done';
+
+        foreach ($notif as $notification) {
+            echo $notification->data['nama'];
+        }
     }
 }

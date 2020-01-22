@@ -8,6 +8,11 @@
         }
     </style>
     @yield('css')
+    <script>
+        window.Laravel = {!! json_encode([
+          'csrfToken' => csrf_token(),
+        ]) !!};
+    </script>
 @stop
 
 @section('classes_body',
@@ -100,26 +105,6 @@
             @endif
                 <ul class="navbar-nav ml-auto @if(config('adminlte.layout_topnav') || View::getSection('layout_topnav'))order-1 order-md-3 navbar-no-expand @endif">
                     @yield('content_top_nav_right')
-
-                    <li class="nav-item dropdown dropdown-notifications">
-                        <a class="nav-link" data-toggle="dropdown" href="#notifications-panel">
-                            <i data-count="0" class="far fa-bell"></i>
-                            <span class="badge badge-warning navbar-badge notif-count" data-count="0"></span>
-                        </a>
-                        <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
-                            <span class="dropdown-item dropdown-header">(<span class="notif-count">0</span>) Notifications</span>
-
-                            <div class="notification-active">
-                            </div>
-                        </div>
-                    </li>
-
-                    {{--  <div class=" header">
-                        <a class="nav-link" data-hotkey="g n" data-ga-click="Header, go to notifications, icon::read" data-channel="my-channel" href="#notifications-panel">
-                            <i data-count="0" class="far fa-bell"></i>
-                            <span class="badge badge-info navbar-badge notif-count" data-count="0"></span>
-                        </a>
-                    </div>  --}}
 
                     @if(Auth::user())
                             <li class="nav-item dropdown">
@@ -226,8 +211,8 @@
     <script src="{{ asset('vendor/adminlte/dist/js/adminlte.min.js') }}"></script>
     <script src="{{ asset('js/chart.js') }}"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
-    <script src="//js.pusher.com/3.1/pusher.min.js"></script>
     <script src="https://js.pusher.com/5.0/pusher.min.js"></script>
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
     <script src="{{asset('js/notifications.js')}}"></script>
     <script>
         $('#file').on('change',function(){

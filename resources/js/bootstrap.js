@@ -42,3 +42,18 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 //     cluster: process.env.MIX_PUSHER_APP_CLUSTER,
 //     encrypted: true
 // });
+import Echo from "laravel-echo"
+
+window.Pusher = require('pusher-js');
+
+window.Echo = new Echo({
+  broadcaster: 'pusher',
+  key: 'bfaa9f1901b2fe1c7050',
+  cluster: 'ap1',
+  forceTLS: true
+});
+
+var channel = Echo.channel('my-channel');
+channel.listen('.my-event', function(data) {
+  alert(JSON.stringify(data));
+});

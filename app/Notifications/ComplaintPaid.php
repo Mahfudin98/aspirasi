@@ -59,16 +59,16 @@ class ComplaintPaid extends Notification
     public function toArray($notifiable)
     {
         return [
-            //
+            'id '      => $this->complaint->id,
+            'nama'     => $this->complaint->nama,
+            'masukan'  => $this->complaint->masukan,
+            'kategori' => $this->complaint->kategori
         ];
     }
 
-    public function toDatabase($notifiable){
-        return [
-            $this->complaint->id,
-            $this->complaint->nama,
-            $this->complaint->masukan,
-            $this->complaint->kategori
-        ];
-    }
+    // public function toDatabase($notifiable){
+    //     return [
+
+    //     ];
+    // }
 }

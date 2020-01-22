@@ -13,6 +13,11 @@ use Mockery\Matcher\Not;
 
 class ComplaintsController extends Controller
 {
+    public function markAsRead()
+    {
+        $this->each->markAsRead();
+    }
+
     public function index(){
 
         $masukan = DB::table('complaints')->where('kategori', 'masukan')->orderBy('created_at','desc')->paginate(10);
@@ -24,6 +29,8 @@ class ComplaintsController extends Controller
     public function show($id){
         $complaints = DB::table('complaints')->where('id',$id)->get()->groupBy('complaints');
         $tasks = Task::where('complaint_id', $id)->get();
+        $complaint = Complaint::find($id);
+        $complaint->unreadNotifications->markAsRead();
         return view('admin.views',['complaints'=> $complaints, 'tasks'=>$tasks]);
     }
 
@@ -77,16 +84,17 @@ class ComplaintsController extends Controller
     }
 
     public function notif(){
-        $notif = Notification::all();
+        $notif = Notification::markAsRead();
         // $complaint = Complaint::find('id');
 
         // $complaint->notify(new ComplaintPaid($complaint));
         // // $complaint->unreadNotifications->markAsRead();
 
         // // return 'done';
+        // foreach ($notif as $notification) {
+        //     echo $notification->data['nama'];
+        // }
 
-        foreach ($notif as $notification) {
-            echo $notification->data['nama'];
-        }
+        return 'done';
     }
 }

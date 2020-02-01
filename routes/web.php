@@ -20,6 +20,7 @@ Route::get('/viewpost', function () {
 
 Auth::routes();
 
+Route::resource('/admin-setting', 'UserController');
 
 Route::get('complain/masukan', 'ComplaintsController@masukan')->name('complain.masukan')->middleware('auth');
 Route::get('complain/keluhan', 'ComplaintsController@keluhan')->name('complain.keluhan')->middleware('auth');
@@ -45,6 +46,7 @@ Route::patch('/terkonfirmasi/{task}', 'ComplaintTaskController@update');
 Route::post('/complaint/{complaint}/tasks', 'ComplaintTaskController@store');
 Route::resource('/home', 'HomeController');
 Route::delete('/img/{id}', 'HomeController@img');
+Route::delete('/deletnotif', 'HomeController@deletNotif');
 
 Auth::routes();
 

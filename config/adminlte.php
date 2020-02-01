@@ -180,7 +180,7 @@ return [
             'href' => 'test',  //form action
             'method' => 'POST', //form method
             'input_name' => 'menu-search-input', //input name
-        ],        
+        ],
         [
             'text' => 'Dashboard',
             'url'  => 'home',
@@ -200,34 +200,33 @@ return [
                 [
                     'text' => 'Aspirasi',
                     'url'  => 'complain',
-                ],                                
+                    'icon' => 'fas fa-fw fa-envelope-open',
+                ],
                 [
                     'text' => 'Terkonfirmasi',
                     'url'  => '/terkonfirmasi',
+                    'icon' => 'fas fa-fw fa-thumbtack',
                 ],
             ],
         ],
-        ['header' => 'account_settings'],
+        
         [
             'text' => 'Pengaturan Admin',
             'url'  => 'admin/settings',
             'icon' => 'fas fa-fw fa-user-cog',
             'submenu' => [
                 [
-                    'text' => 'Tambah Admin',
-                    'url'  => '/tambah-admin',
-                ],
+                    'text' => 'Admin',
+                    'url'  => '/admin-setting',
+                    'icon' => 'fas fa-fw fa-user',
+                ],    
                 [
-                    'text' => 'List Admin',
-                    'url'  => '/list-admin',
-                ]
+                    'text' => 'Ubah Password',
+                    'url'  => '/ubah-password',
+                    'icon' => 'fas fa-fw fa-lock',
+                ],            
             ],
-        ],
-        [
-            'text' => 'Ubah Password',
-            'url'  => '/ubah-password',
-            'icon' => 'fas fa-fw fa-lock',
-        ],                
+        ],        
     ],
 
     /*

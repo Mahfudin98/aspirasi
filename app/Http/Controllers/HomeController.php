@@ -5,9 +5,11 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Post;
 use App\Complaint;
+use App\Task;
 use App\Notifications\ComplaintPaid;
 use Illuminate\Support\Facades\DB;
 use App\Notification;
+use App\User;
 
 class HomeController extends Controller
 {
@@ -29,8 +31,18 @@ class HomeController extends Controller
     public function index()
     {
         $posts = DB::table('posts')->orderBy('created_at','desc')->paginate(10);
-        $complaint = Notification::orderBy('created_at','desc')->paginate(3);
-        return view('home', ['posts' => $posts, 'complaint' => $complaint]);
+        $complaint = Complaint::all();
+        $user = User::all();
+        $noification = Notification::orderBy('created_at','desc')->paginate(3);
+        $task = Task::all();
+        $persen = DB::table('tasks')->avg('completed');
+        return view('home', ['posts' => $posts, 'complaint' => $complaint, 'user' => $user, 'notification'=>$noification, 'task'=>$task, 'persen'=>$persen]);
+    }
+
+    public function deletNotif(){
+        Notification::delete();
+
+        return back();
     }
 
     public function create(){

@@ -51,7 +51,7 @@
                         @endif
                     @endforeach
                     <div class="card-header">
-                    <h3 class="card-title">Read Mail</h3>
+                    <h3 class="card-title">Baca Masukan</h3>
 
                     <div class="card-tools">
                         <a href="#" class="btn btn-tool" data-toggle="tooltip" title="Previous"><i class="fas fa-chevron-left"></i></a>
@@ -81,7 +81,7 @@
                     </div>
                     <!-- /.mailbox-controls -->
                     <div class="mailbox-read-message">
-                        {{ $row[0]->masukan }}
+                        <p class="text-justify">{{ $row[0]->masukan }}</p>
                     </div>
                     <!-- /.mailbox-read-message -->
                     </div>
@@ -106,15 +106,6 @@
                     @endif
                     </div>
                     <!-- /.card-footer -->
-                    <div class="card-footer">
-                    <div class="float-right">
-                        <button type="button" class="btn btn-default"><i class="fas fa-reply"></i> Reply</button>
-                        <button type="button" class="btn btn-default"><i class="fas fa-share"></i> Forward</button>
-                    </div>
-                    <button type="button" class="btn btn-default"><i class="far fa-trash-alt"></i> Delete</button>
-                    <button type="button" class="btn btn-default"><i class="fas fa-print"></i> Print</button>
-                    </div>
-                    <!-- /.card-footer -->
                 </div>
             @else
                 <div class="card card-primary card-outline">
@@ -136,7 +127,7 @@
                         @endif
                     @endforeach
                     <div class="card-header">
-                    <h3 class="card-title">Read Mail</h3>
+                    <h3 class="card-title">Baca Keluhan</h3>
 
                     <div class="card-tools">
                         <a href="#" class="btn btn-tool" data-toggle="tooltip" title="Previous"><i class="fas fa-chevron-left"></i></a>
@@ -166,7 +157,7 @@
                     </div>
                     <!-- /.mailbox-controls -->
                     <div class="mailbox-read-message">
-                        {{ $row[0]->masukan }}
+                        <p class="text-justify">{{ $row[0]->masukan }}</p>
                     </div>
                     <!-- /.mailbox-read-message -->
                     </div>
@@ -191,15 +182,7 @@
                     @endif
                     </div>
                     <!-- /.card-footer -->
-                    <div class="card-footer">
-                    <div class="float-right">
-                        <button type="button" class="btn btn-default"><i class="fas fa-reply"></i> Reply</button>
-                        <button type="button" class="btn btn-default"><i class="fas fa-share"></i> Forward</button>
-                    </div>
-                    <button type="button" class="btn btn-default"><i class="far fa-trash-alt"></i> Delete</button>
-                    <button type="button" class="btn btn-default"><i class="fas fa-print"></i> Print</button>
-                    </div>
-                    <!-- /.card-footer -->
+
                 </div>
             @endif
           @endforeach

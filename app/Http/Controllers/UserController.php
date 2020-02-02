@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
 use App\User;
 
 class UserController extends Controller
@@ -25,16 +26,37 @@ class UserController extends Controller
 
     public function store(Request $request){
         $request->validate([
-            'name' => 'required',
-            'email' => 'required',
-            'password' => 'required | min:8',
+            'name'        => 'required',
+            'email'       => 'required',
+            'password'    => 'required | string | min:8',
+            'jabatan'     => 'required',
+            'phonenumber' => 'nullable | min:11',
+            'images'      => 'nullable|image|max:2048',
         ]);
+
+        if($request->hasFile('images')) {
+            // Get filename with extension
+            $filenameWithExt = $request->file('images')->getClientOriginalName();
+            // Get just filename
+            $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
+            // Get just ext
+            $extension = $request->file('images')->getClientOriginalExtension();
+            //Filename to store
+            $fileNameToStore = $filename.'_'.time().'.'.$extension;
+            // Upload Image
+            $path = $request->file('images')->move(public_path('images'), $fileNameToStore);
+        } else {
+            $fileNameToStore = 'noimages.jpg';
+        }
 
         $form_data = new User;
         $form_data = array(
-            'name' => $request->name,
-            'email' => $request->email,
-            'password' => $request->password,
+            'name'        => $request->name,
+            'email'       => $request->email,
+            'password'    => Hash::make($request->password) ,
+            'jabatan'     => $request->jabatan,
+            'phonenumber' => $request->phonenumber,
+            'images'       => $fileNameToStore,
         );
 
         User::create($form_data);

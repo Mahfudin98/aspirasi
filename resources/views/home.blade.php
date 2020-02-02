@@ -57,8 +57,8 @@
           <div class="col-lg-3 col-6">
             <!-- small box -->
             <div class="small-box bg-danger">
-              <div class="inner">                  
-                <h3>{{$task->count()}}</h3>         
+              <div class="inner">
+                <h3>{{$persen->count()}}</h3>
                 <p>Terselesaikan</p>
               </div>
               <div class="icon">

@@ -35,7 +35,7 @@ class HomeController extends Controller
         $user = User::all();
         $noification = Notification::orderBy('created_at','desc')->paginate(3);
         $task = Task::all();
-        $persen = DB::table('tasks')->avg('completed');
+        $persen = DB::table('tasks');
         return view('home', ['posts' => $posts, 'complaint' => $complaint, 'user' => $user, 'notification'=>$noification, 'task'=>$task, 'persen'=>$persen]);
     }
 

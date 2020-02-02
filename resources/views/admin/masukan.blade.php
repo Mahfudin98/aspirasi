@@ -30,6 +30,7 @@
             <div class="card-body p-0">
               <div class="table-responsive mailbox-messages">
                 <table id="example1" class="table table-hover table-striped">
+                @if ($masukan->count())
                 @foreach ($masukan as $row)
                  @if ($row->kategori === 'masukan')
                    <tbody>
@@ -59,6 +60,12 @@
                   </tbody>
                  @endif
                 @endforeach
+                @else
+                  <div class="text-center">
+                    <span class="text-bold">Data Belum Ada!</span>
+                  </div>
+                @endif
+
                 </table>
                 <!-- /.table -->
               </div>
@@ -108,6 +115,7 @@
             <div class="card-body p-0">
               <div class="table-responsive mailbox-messages">
                 <table id="example1" class="table table-hover table-striped">
+                @if ($keluhan->count())
                 @foreach ($keluhan as $row)
                  @if ($row->kategori === 'keluhan')
                    <tbody>
@@ -137,6 +145,11 @@
                   </tbody>
                  @endif
                 @endforeach
+                @else
+                <div class="text-center">
+                    <span class="text-bold">Data Belum Ada!</span>
+                </div>
+                @endif
                 </table>
                 <!-- /.table -->
               </div>

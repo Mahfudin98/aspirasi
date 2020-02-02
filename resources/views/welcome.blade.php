@@ -217,7 +217,6 @@
                   <select class="form-control custom-select" name="keterangan">
                     <option selected disabled>Pilih satu</option>
                     <option>Mahasiswa</option>
-                    <option>Dosen</option>
                     <option>Umum</option>
                   </select>
                 </div>
@@ -256,7 +255,7 @@
                   <select class="form-control custom-select" name="jenis_privasi">
                     <option selected disabled>Pilih satu</option>
                     <option>Umum</option>
-                    <option>Rahasia</option>
+                    <option>Anonim</option>
                   </select>
                 </div>
                 <div class="form-group">

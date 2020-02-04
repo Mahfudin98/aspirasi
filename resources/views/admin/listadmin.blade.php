@@ -42,9 +42,15 @@
                 </div>
                 <div class="card-footer">
                     <div class="text-right">
-                    <a href="#" class="btn btn-sm bg-red">
-                        <i class="fas fa-trash"></i>
-                    </a>
+                        @if (Auth::user()->name === $row->name)
+                        <a href="disabled" class="btn btn-sm bg-red disabled" data-toggle="modal" data-target="#confirmDelete{{$row->id}}">
+                            <i class="fas fa-trash"></i>
+                        </a>
+                        @else
+                        <a href="#" class="btn btn-sm bg-red" data-toggle="modal" data-target="#confirmDelete{{$row->id}}">
+                            <i class="fas fa-trash"></i>
+                        </a>
+                        @endif
                     <a href="#" class="btn btn-sm btn-primary" href="#" data-toggle="modal" data-target="#edit{{$row->id}}" aria-label="Tambah Admin" role="button">
                         <i class="fas fa-pen"></i>
                     </a>
@@ -229,5 +235,34 @@
           </div>
         </div>
     </div>
+    @endforeach
+
+    <!-- delete -->
+    @foreach ($users as $row)
+        <div class="modal fade" id="confirmDelete{{$row->id}}" role="dialog" aria-labelledby="confirmDeleteLabel" aria-hidden="true">
+            <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="float-right">Delete Admin</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">
+                        <i class="fas fa-times"></i>
+                        </span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                <p>Anda yakin menghapus admin {{$row->name}}?</p>
+                </div>
+                <div class="modal-footer">
+                <form method="POST" action="{{ url('/admin-setting/'.$row->id)}}" accept-charset="UTF-8" style="display:inline">
+                    @method('delete')
+                    @csrf
+                <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                <button type="submit" class="btn btn-danger" id="confirm">Delete</button>
+                </form>
+                </div>
+            </div>
+            </div>
+        </div>
     @endforeach
 @stop

@@ -63,4 +63,11 @@ class UserController extends Controller
 
         return back();
     }
+
+    public function destroy($id){
+        $users = User::where('id', $id);
+        $users->delete();
+
+        return back();
+    }
 }

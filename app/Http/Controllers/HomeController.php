@@ -33,10 +33,16 @@ class HomeController extends Controller
         $posts = DB::table('posts')->orderBy('created_at','desc')->paginate(10);
         $complaint = Complaint::all();
         $user = User::all();
-        $noification = Notification::orderBy('created_at','desc')->paginate(3);
+
+        $notifi = Notification::orderBy('created_at','desc')->paginate(100);
         $task = Task::all();
         $persen = DB::table('tasks');
-        return view('home', ['posts' => $posts, 'complaint' => $complaint, 'user' => $user, 'notification'=>$noification, 'task'=>$task, 'persen'=>$persen]);
+        return view('home', ['posts' => $posts, 'complaint' => $complaint, 'user' => $user, 'task'=>$task, 'persen'=>$persen, 'notifi'=>$notifi]);
+    }
+
+    public function notify(){
+        $notification = Notification::orderBy('created_at','desc')->paginate(3);
+        return view('listnotify',['notification'=>$notification]);
     }
 
     public function deletNotif(){

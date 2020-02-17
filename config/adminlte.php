@@ -209,7 +209,7 @@ return [
                 ],
             ],
         ],
-        
+
         [
             'text' => 'Pengaturan Admin',
             'url'  => 'admin/settings',
@@ -219,14 +219,14 @@ return [
                     'text' => 'Admin',
                     'url'  => '/admin-setting',
                     'icon' => 'fas fa-fw fa-user',
-                ],    
+                ],
                 [
                     'text' => 'Ubah Password',
                     'url'  => '/ubah-password',
                     'icon' => 'fas fa-fw fa-lock',
-                ],            
+                ],
             ],
-        ],        
+        ],
     ],
 
     /*

@@ -25,6 +25,13 @@
     @else
     <link rel="stylesheet" href="{{ asset('css/app.css') }}">
     @endif
+    <script type = "text/JavaScript">
+
+        function AutoRefresh( t ) {
+           setTimeout("location.reload(true);", t);
+        }
+
+    </script>
 </head>
 <body class="@yield('classes_body')" @yield('body_data')>
 

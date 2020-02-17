@@ -88,7 +88,7 @@
                         <div class="col-12">
                           <div class="card">
                             <!-- /.card-header -->
-                            <div class="card-body table-responsive p-0" style="height: 782px;">
+                            <div class="card-body table-responsive p-0" style="height: 798px;">
                               @if ($posts->count())
                               @foreach($posts as $errors)
                               <a class="nav-link" href="#portfolio" data-toggle="modal" data-target="#post{{$errors->id}}">
@@ -145,60 +145,14 @@
                       </div>
                     </div>
                     <!-- /.card-header -->
-                    <div class="card-body p-0">
-                      <ul class="products-list product-list-in-card pl-2 pr-2">
-                          @if ($notification->count())
-                          @foreach ($notification as $errors)
-                          @if ($errors->read_at === null)
-                          <li class="item text-bold">
-                            <div class="product-img">
-                                <i class="fas fa-file mr-2 size-50"></i>
-                              {{--  <img src="dist/img/default-150x150.png" alt="Product Image" class="img-size-50">  --}}
-                            </div>
-                            <div class="product-info">
-                              <a href="complain/{{$errors->notifiable_id}}" class="product-title">{{$errors->data['nama']}}
-                                <span class="badge badge-warning float-right">{{$errors->data['kategori']}}</span>
-                                <span class="badge badge-info float-right">{{$errors->created_at->diffForHumans()}}</span>
-                            </a>
-                              <span class="product-description">
-                                {{$errors->data['masukan']}}
-                              </span>
-                            </div>
-                          </li>
-                          @else
-                          <li class="item">
-                            <div class="product-img">
-                                <i class="fas fa-file mr-2 size-50"></i>
-                              {{--  <img src="dist/img/default-150x150.png" alt="Product Image" class="img-size-50">  --}}
-                            </div>
-                            <div class="product-info">
-                              <a href="complain/{{$errors->notifiable_id}}" class="product-title">{{$errors->data['nama']}}
-                                <span class="badge badge-warning float-right">{{$errors->data['kategori']}}</span>
-                                <span class="badge badge-success float-right">read at {{$errors->read_at->diffForHumans()}}</span>
-                                <span class="badge badge-info float-right">{{$errors->created_at->diffForHumans()}}</span>
-                            </a>
-                              <span class="product-description">
-                                {{$errors->data['masukan']}}
-                              </span>
-                            </div>
-                          </li>
-                          @endif
-                          @endforeach
-                          @else
-                          <div class="text-center">
-                            <br>
-                            <span>Data masih kosong</span>
-                            <br>
-                            <br>
-                          </div>
-                          @endif
-
-                        <!-- /.item -->
-                      </ul>
+                    <div class="card-body p-0" id="show">
+                        <!-- /.notification in here -->
                     </div>
                     <!-- /.card-body -->
                     <div class="card-footer text-center">
-                      <a href="javascript:void(0)" class="uppercase">View All Products</a>
+                        <a class="nav-link" href="#portfolio" data-toggle="modal" data-target="#allnotifikasi">
+                          Tampilkan Semua Notifikasi
+                        </a>
                     </div>
                     <!-- /.card-footer -->
                   </div>
@@ -261,6 +215,78 @@
            </div>
         </div>
       </section>
+
+
+      <div class="portfolio-modal modal fade" id="allnotifikasi" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog modal-xl" role="document">
+          <div class="modal-content rounded mx-auto d-block">
+            <div class="modal-body">
+              <div class="container">
+                <div class="row justify-content-center">
+                  <div class="col-lg-8">
+                    <div class="card card-primary card-outline">
+                        <div class="card-header">
+                          <h3>Semua Notifikasi</h3>
+                        </div>
+                        <div class="card-body">
+                            <ul class="products-list product-list-in-card pl-2 pr-2">
+                                @if ($notifi->count())
+                                @foreach ($notifi as $errors)
+                                @if ($errors->read_at === null)
+                                <li class="item text-bold">
+                                  <div class="product-img">
+                                      <i class="fas fa-file mr-2 size-50"></i>
+                                    {{--  <img src="dist/img/default-150x150.png" alt="Product Image" class="img-size-50">  --}}
+                                  </div>
+                                  <div class="product-info">
+                                    <a href="complain/{{$errors->notifiable_id}}" class="product-title">{{substr(strip_tags($errors->data['nama']),0,2)}}*****
+                                      <span class="badge badge-warning float-right">{{$errors->data['kategori']}}</span>
+                                      <span class="badge badge-info float-right">{{$errors->created_at->diffForHumans()}}</span>
+                                  </a>
+                                    <span class="product-description">
+                                        {{substr(strip_tags($errors->data['masukan']),0,50)}}....
+                                    </span>
+                                  </div>
+                                </li>
+                                @else
+                                <li class="item">
+                                  <div class="product-img">
+                                      <i class="fas fa-file mr-2 size-50"></i>
+                                    {{--  <img src="dist/img/default-150x150.png" alt="Product Image" class="img-size-50">  --}}
+                                  </div>
+                                  <div class="product-info">
+                                    <a href="complain/{{$errors->notifiable_id}}" class="product-title">{{substr(strip_tags($errors->data['nama']),0,2)}}*****
+                                      <span class="badge badge-warning float-right">{{$errors->data['kategori']}}</span>
+                                      <span class="badge badge-success float-right">read at {{$errors->read_at->diffForHumans()}}</span>
+                                      <span class="badge badge-info float-right">{{$errors->created_at->diffForHumans()}}</span>
+                                  </a>
+                                    <span class="product-description">
+                                        {{substr(strip_tags($errors->data['masukan']),0,50)}}....
+                                    </span>
+                                  </div>
+                                </li>
+                                @endif
+                                @endforeach
+                                @else
+                                <div class="text-center">
+                                  <br>
+                                  <span>Data masih kosong</span>
+                                  <br>
+                                  <br>
+                                </div>
+                                @endif
+
+                              <!-- /.item -->
+                            </ul>
+                        </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
 @stop
 
 @section('postview')
@@ -453,7 +479,7 @@
 @endforeach
 
 @section('delimg')
-<div class="modal fade" id="delet{{$errors->id}}" role="dialog" aria-labelledby="confirmDeleteLabel" aria-hidden="true">
+  <div class="modal fade" id="delet{{$errors->id}}" role="dialog" aria-labelledby="confirmDeleteLabel" aria-hidden="true">
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">

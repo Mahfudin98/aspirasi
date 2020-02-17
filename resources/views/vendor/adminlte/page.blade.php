@@ -13,6 +13,18 @@
           'csrfToken' => csrf_token(),
         ]) !!};
     </script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script>
+        function loadlink(){
+            $('#show').load('/notify');
+            console.log('TESTING!!!!');
+        }
+
+        loadlink();
+        setInterval(function(){
+            loadlink()
+        }, 5000);
+    </script>
 @stop
 
 @section('classes_body',

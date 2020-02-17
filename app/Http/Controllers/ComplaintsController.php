@@ -9,7 +9,11 @@ use App\Task;
 use App\Events\ComplaintNotif;
 use App\Notifications\ComplaintPaid;
 use App\Notification;
+use Illuminate\Support\Facades\Auth;
 use Mockery\Matcher\Not;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Password;
+use App\User;
 
 class ComplaintsController extends Controller
 {

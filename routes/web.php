@@ -18,7 +18,7 @@ Route::get('/viewpost', function () {
     return view('post');
 });
 
-Auth::routes();
+// Auth::routes();
 
 Route::resource('/admin-setting', 'UserController');
 
@@ -35,9 +35,14 @@ Route::get('test', function () {
     event(new App\Events\ComplaintNotif('Someone'));
     return "Event has been sent!";
 });
-Route::get('/coba', function(){
-    return view("test");
+Route::get('/ubah-password', function(){
+    return view("auth.passwords.reset");
 });
+
+Route::get('/notify', 'HomeController@notify');
+
+Route::get('/lupa-password', 'ComplaintsController@form')->name('form');
+Route::post('/reset', 'ComplaintsController@attempt')->name('reset');
 
 Route::get('/notif', 'ComplaintsController@notif');
 Route::get('/terkonfirmasi', 'ComplaintTaskController@index')->name('terkonfirmasi');
@@ -48,7 +53,9 @@ Route::resource('/home', 'HomeController');
 Route::delete('/img/{id}', 'HomeController@img');
 Route::delete('/deletnotif', 'HomeController@deletNotif');
 
-Auth::routes();
+Auth::routes([
+    'register' => false, // Registration Routes...
+]);
 
 // Route::get('/home', function() {
 //     return view('home');

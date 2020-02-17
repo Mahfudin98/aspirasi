@@ -27,7 +27,7 @@
                 <p class="login-box-msg">{{ trans('adminlte::adminlte.password_reset_message') }}</p>
                 <form action="{{ $password_reset_url }}" method="post">
                     {{ csrf_field() }}
-                    <input type="hidden" name="token" value="{{ $token }}">
+                    <input type="hidden" name="token" value="{{ $token ?? '' }}">
                     <div class="input-group mb-3">
                         <input type="email" name="email" class="form-control {{ $errors->has('email') ? 'is-invalid' : '' }}" value="{{ old('email') }}" placeholder="{{ trans('adminlte::adminlte.email') }}" autofocus>
                         <div class="input-group-append">

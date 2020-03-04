@@ -32,10 +32,12 @@
                         </ul>
                     </div>
                     <div class="col-5 text-center">
-                        @if ($row->images === "noimages.jpg")
-                        <img src="{{asset('images/default.jpg')}}" alt="" class=" img-thumbnail img-fluid">
+                        @if ($row->images === "noimage.jpg")
+                        <button>
+                            <img src="{{asset('images/default.jpg')}}" alt="" class=" img-thumbnail img-fluid">
+                        </button>
                         @else
-                        <img src="{{URL::to('/images/'.$row->images) }}" alt="" class=" img-thumbnail img-fluid">
+                            <img src="{{URL::to('/images/'.$row->images) }}" alt="" class=" img-thumbnail img-fluid">
                         @endif
                     </div>
                     </div>
@@ -176,12 +178,13 @@
                   </button>
             </div>
             <div class="modal-body">
-                    <form method="post" action="{{ route('admin-setting.store')}}" enctype="multipart/form-data">
+                    <form method="post" action="{{ url('/admin-setting/'.$row->id)}}" enctype="multipart/form-data">
                     @csrf
+                    @method('patch')
                       <div class="card-body">
 
                         <div class="input-group mb-3">
-                            <input type="text" name="name" class="form-control" placeholder="Nama Lengkap" autofocus required>
+                            <input type="text" name="name" class="form-control" value="{{$row->name}}" autofocus required>
                             <div class="input-group-append">
                                 <div class="input-group-text">
                                     <span class="fas fa-user"></span>
@@ -190,7 +193,7 @@
                         </div>
 
                         <div class="input-group mb-3">
-                            <input type="email" name="email" class="form-control" placeholder="Email" required>
+                            <input type="email" name="email" class="form-control" value="{{$row->email}}" required>
                             <div class="input-group-append">
                                 <div class="input-group-text">
                                     <span class="fas fa-envelope"></span>
@@ -199,7 +202,7 @@
                         </div>
 
                         <div class="input-group mb-3">
-                            <input type="password" name="password" class="form-control" placeholder="Password" required>
+                            <input type="password" name="password" class="form-control" placeholder="Password">
                             <div class="input-group-append">
                                 <div class="input-group-text">
                                     <span class="fas fa-lock"></span>
@@ -208,25 +211,47 @@
                         </div>
 
                         <div class="input-group mb-3">
-                            <input type="text" name="jabatan" class="form-control" placeholder="Jabatan" required>
+                            <input type="text" name="jabatan" class="form-control" value="{{$row->jabatan}}" required>
                             <div class="input-group-append">
                                 <div class="input-group-text">
-                                    <span class="fas fa-lock"></span>
+                                    <span class="fas fa-id-card-alt"></span>
                                 </div>
                             </div>
                         </div>
 
+                        @if ($row->phonenumber != null)
                         <div class="input-group mb-3">
-                            <input type="text" name="phonenumber" class="form-control" placeholder="Nomor Handphone" required>
+                            <input type="text" name="phonenumber" class="form-control" value="{{$row->phonenumber}}">
                             <div class="input-group-append">
                                 <div class="input-group-text">
                                     <span class="fas fa-phone"></span>
                                 </div>
                             </div>
                         </div>
+                        @else
+                        <div class="input-group mb-3">
+                            <input type="text" name="phonenumber" class="form-control" placeholder="Nomor handphone masih kosong">
+                            <div class="input-group-append">
+                                <div class="input-group-text">
+                                    <span class="fas fa-phone"></span>
+                                </div>
+                            </div>
+                        </div>
+                        @endif
+                        <div class="input-group mb-3">
+                            <div class="custom-file">
+                                <input class="custom-file-input" type="file" name="images"  id="image">
+                                <label class="custom-file-label" for="file">{{$row->images}}</label>
+                            </div>
+                            <div class="input-group-append">
+                                <div class="input-group-text">
+                                    <span class="fas fa-image"></span>
+                                </div>
+                            </div>
+                        </div>
 
                         <button type="submit" class="btn btn-primary btn-block btn-flat">
-                            Tambah Admin
+                            Edit Admin
                         </button>
 
                       </div>
@@ -266,3 +291,14 @@
         </div>
     @endforeach
 @stop
+
+@section('js')
+    <script>
+        $('#file').on('change',function(){
+            //get the file name
+            var fileName = $(this).val();
+            //replace the "Choose a file" label
+            $(this).next('.custom-file-label').html(fileName);
+        })
+    </script>
+@endsection

@@ -58,7 +58,7 @@
             <!-- small box -->
             <div class="small-box bg-danger">
               <div class="inner">
-                <h3>{{$persen->count()}}</h3>
+                <h3>{{$persen->where('completed', '1')->count()}}</h3>
                 <p>Terselesaikan</p>
               </div>
               <div class="icon">
@@ -72,57 +72,6 @@
       <section class="content">
         <div class="container-fluid">
           <div class="row">
-            <div class="col-md-6">
-              <div class="card card-info">
-                <div class="card-header">
-                  <h3 class="card-title">List Postingan</h3>
-
-                  <div class="card-tools">
-                    <button type="button" class="btn btn-tool" data-card-widget="collapse">
-                      <i class="fas fa-file-alt"></i>
-                    </button>
-                  </div>
-                </div>
-                <div class="card-body">
-                    <div class="row">
-                        <div class="col-12">
-                          <div class="card">
-                            <!-- /.card-header -->
-                            <div class="card-body table-responsive p-0" style="height: 798px;">
-                              @if ($posts->count())
-                              @foreach($posts as $errors)
-                              <a class="nav-link" href="#portfolio" data-toggle="modal" data-target="#post{{$errors->id}}">
-                                <h2 class="post-title">
-                                  {{$errors->title}}
-                                </h2>
-                              </a>
-                              <p class="post-subtitle">
-                              @if ($errors->image === 'noimage.jpg')
-                                {{ substr(strip_tags($errors->content),0,50) }}<a href="#">....</a>
-                              @else
-                                {{ substr(strip_tags($errors->content),0,50) }}<a href="#">....</a> <i class="fas fa-file-image"></i>
-                              @endif
-                              </p>
-                              <p class="post-meta">Posted by
-                                <a href="#">{{$errors->author}}</a>
-                                {{ date('F d, Y', strtotime($errors->created_at)) }}</p>
-                            @endforeach
-                              @else
-                            <div class=" text-center">
-                                <span class=" swal2-center">Data belum ada</span>
-                            </div>
-                              @endif
-                            </div>
-                            <!-- /.card-body -->
-                          </div>
-                          <!-- /.card -->
-                        </div>
-                      </div>
-                </div>
-                <!-- /.card-body -->
-              </div>
-            </div>
-
               <div class="col-md-6">
                 <div class="card card-warning">
                     <div class="card-header">
@@ -212,6 +161,57 @@
                   <!-- /.card-body -->
                 </div>
               </div>
+            <div class="col-md-6">
+              <div class="card card-info">
+                <div class="card-header">
+                  <h3 class="card-title">List Postingan</h3>
+
+                  <div class="card-tools">
+                    <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                      <i class="fas fa-file-alt"></i>
+                    </button>
+                  </div>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-12">
+                          <div class="card">
+                            <!-- /.card-header -->
+                            <div class="card-body table-responsive p-0" style="height: 798px;">
+                              @if ($posts->count())
+                              @foreach($posts as $errors)
+                              <a class="nav-link" href="#portfolio" data-toggle="modal" data-target="#post{{$errors->id}}">
+                                <h2 class="post-title">
+                                  {{$errors->title}}
+                                </h2>
+                              </a>
+                              <p class="post-subtitle">
+                              @if ($errors->image === 'noimage.jpg')
+                                {{ substr(strip_tags($errors->content),0,50) }}<a href="#">....</a>
+                              @else
+                                {{ substr(strip_tags($errors->content),0,50) }}<a href="#">....</a> <i class="fas fa-file-image"></i>
+                              @endif
+                              </p>
+                              <p class="post-meta">Posted by
+                                <a href="#">{{$errors->author}}</a>
+                                {{ date('F d, Y', strtotime($errors->created_at)) }}</p>
+                            @endforeach
+                              @else
+                            <div class=" text-center">
+                                <span class=" swal2-center">Data belum ada</span>
+                            </div>
+                              @endif
+                            </div>
+                            <!-- /.card-body -->
+                          </div>
+                          <!-- /.card -->
+                        </div>
+                      </div>
+                </div>
+                <!-- /.card-body -->
+              </div>
+            </div>
+
            </div>
         </div>
       </section>

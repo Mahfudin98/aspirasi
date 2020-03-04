@@ -16,12 +16,12 @@
 
               <div class="card-tools">
                 <div class="input-group input-group-sm">
-                  <input type="text" class="form-control" placeholder="Search Mail">
+                  {{-- <input type="text" class="form-control" placeholder="Search Mail">
                   <div class="input-group-append">
                     <div class="btn btn-primary">
                       <i class="fas fa-search"></i>
                     </div>
-                  </div>
+                  </div> --}}
                 </div>
               </div>
               <!-- /.card-tools -->
@@ -101,12 +101,12 @@
 
               <div class="card-tools">
                 <div class="input-group input-group-sm">
-                  <input type="text" class="form-control" placeholder="Search Mail">
+                  {{-- <input type="text" class="form-control" placeholder="Search Mail">
                   <div class="input-group-append">
                     <div class="btn btn-primary">
                       <i class="fas fa-search"></i>
                     </div>
-                  </div>
+                  </div> --}}
                 </div>
               </div>
               <!-- /.card-tools -->

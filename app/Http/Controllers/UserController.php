@@ -46,7 +46,7 @@ class UserController extends Controller
             // Upload Image
             $path = $request->file('images')->move(public_path('images'), $fileNameToStore);
         } else {
-            $fileNameToStore = 'noimages.jpg';
+            $fileNameToStore = 'noimage.jpg';
         }
 
         $form_data = new User;
@@ -71,8 +71,41 @@ class UserController extends Controller
         return back();
     }
 
-    //reset password
+    public function edit($id){
+        $users = User::find($id);
 
+        return view('admin.listadmin', ['users' => $users]);
+    }
+
+    public function update(Request $request, $id){
+        $users = User::find($id);
+
+        if($request->hasFile('images')) {
+            // Get filename with extension
+            $filenameWithExt = $request->file('images')->getClientOriginalName();
+            // Get just filename
+            $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
+            // Get just ext
+            $extension = $request->file('images')->getClientOriginalExtension();
+            //Filename to store
+            $fileNameToStore = $filename.'_'.time().'.'.$extension;
+            // Upload Image
+            $path = $request->file('images')->move(public_path('images'), $fileNameToStore);
+        } else {
+            $fileNameToStore = 'noimage.jpg';
+        }
+
+        $users->name = $request->name;
+        $users->email = $request->email;
+        $users->password = Hash::make($request->password);
+        $users->jabatan = $request->jabatan;
+        $users->phonenumber = $request->phonenumber;
+        $users->images = $fileNameToStore;
+
+        $users->save();
+
+        return back();
+    }
 
 
 }

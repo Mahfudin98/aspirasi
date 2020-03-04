@@ -17,6 +17,11 @@ use App\User;
 
 class ComplaintsController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     public function markAsRead()
     {
         $this->each->markAsRead();
@@ -38,55 +43,6 @@ class ComplaintsController extends Controller
         return view('admin.views',['complaints'=> $complaints, 'tasks'=>$tasks]);
     }
 
-    public function create(){
-        return view('/');
-    }
-
-    public function store(Request $request){
-        $request->validate([
-            'nama'          => 'required',
-            'keterangan'    => 'required',
-            'email'         => 'required',
-            'file'          => 'nullable|image|max:2048',
-            'masukan'       => 'required',
-            'jenis_privasi' => 'required',
-            'kategori'      => 'required',
-        ]);
-
-        if($request->hasFile('file')) {
-            // Get filename with extension
-            $filenameWithExt = $request->file('file')->getClientOriginalName();
-            // Get just filename
-            $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
-            // Get just ext
-            $extension = $request->file('file')->getClientOriginalExtension();
-            //Filename to store
-            $fileNameToStore = $filename.'_'.time().'.'.$extension;
-            // Upload Image
-            $path = $request->file('file')->move(public_path('file'), $fileNameToStore);
-        } else {
-            $fileNameToStore = 'noimage.jpg';
-        }
-        $form_data =  new Complaint();
-        $form_data = array(
-            'nama'           => $request->nama,
-            'keterangan'     => $request->keterangan,
-            'email'          => $request->email,
-            'file'           => $fileNameToStore,
-            'masukan'        => $request->masukan,
-            'jenis_privasi'  => $request->jenis_privasi,
-            'kategori'       => $request->kategori
-         );
-
-         $complaint = Complaint::create($form_data);
-
-         $complaint->notify(new ComplaintPaid($complaint));
-
-         event(new ComplaintNotif($complaint));
-
-         return redirect('/');
-    }
-
     public function notif(){
         $notif = Notification::markAsRead();
         // $complaint = Complaint::find('id');
@@ -100,5 +56,12 @@ class ComplaintsController extends Controller
         // }
 
         return 'done';
+    }
+
+    public function destroy($id){
+        $complaint = Complaint::find($id);
+        $complaint->delete();
+
+        return redirect('/complain');
     }
 }

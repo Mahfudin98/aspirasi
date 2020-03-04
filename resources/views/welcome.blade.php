@@ -19,6 +19,15 @@
   <!-- Theme CSS -->
   <link href="{{asset('index/css/freelancer.min.css')}}" rel="stylesheet">
 
+  <script>
+    $('#gambar').on('change',function(){
+        //get the file name
+        var fileName = $(this).val();
+        //replace the "Choose a file" label
+        $(this).next('.custom-file-label').html(fileName);
+    });
+  </script>
+
 </head>
 
 <body id="page-top">
@@ -205,12 +214,12 @@
             <div class="card-header">
               <h3 class="card-title">Form Aspirasi <i class="fas fa-pen-square float-right"></i></h3>
             </div>
-            <form method="post" action="{{ route('complain.store') }}" enctype="multipart/form-data">
+            <form method="post" action="{{ route('post.store') }}" enctype="multipart/form-data">
             @csrf
               <div class="card-body">
                 <div class="form-group">
                   <label for="inputName">Nama</label>
-                  <input type="text" name="nama" id="inputName" class="form-control">
+                  <input type="text" name="nama" id="inputName" class="form-control" required>
                 </div>
                 <div class="form-group">
                   <label for="inputStatus">Keterangan</label>
@@ -222,7 +231,7 @@
                 </div>
                 <div class="form-group">
                   <label for="inputName">Email</label>
-                  <input type="text" id="inputName" class="form-control" name="email">
+                  <input type="text" id="inputName" class="form-control" name="email" required>
                 </div>
                   <div id="accordion">
                       <div class="card card-danger">
@@ -237,7 +246,7 @@
                                   <label>Masukan file disini :</label>
                                       <div class="input-group">
                                           <div class="custom-file">
-                                              <input class="custom-file-input" type="file" name="file"  id="customFile">
+                                              <input class="custom-file-input" type="file" name="file"  id="gambar">
                                               <label class="custom-file-label" for="customFile">Pilih file max : 2mb</label>
                                           </div>
                                       </div>
@@ -248,11 +257,11 @@
                   </div>
                 <div class="form-group">
                   <label for="inputDescription">Masukan</label>
-                  <textarea id="inputDescription" name="masukan" class="form-control" rows="4"></textarea>
+                  <textarea id="inputDescription" name="masukan" class="form-control" rows="4" required></textarea>
                 </div>
                 <div class="form-group">
                   <label for="inputStatus">Jenis Privasi</label>
-                  <select class="form-control custom-select" name="jenis_privasi">
+                  <select class="form-control custom-select" name="jenis_privasi" required>
                     <option selected disabled>Pilih satu</option>
                     <option>Umum</option>
                     <option>Anonim</option>
@@ -282,7 +291,7 @@
   </section>
 
   <!-- Footer -->
-  <footer class="footer text-center">
+  {{--  <footer class="footer text-center">
     <div class="container">
       <div class="row">
 
@@ -319,12 +328,12 @@
 
       </div>
     </div>
-  </footer>
+  </footer>  --}}
 
   <!-- Copyright Section -->
   <section class="copyright py-4 text-center text-white">
     <div class="container">
-      <small>Copyright &copy; Your Website 2019</small>
+      <small>Copyright &copy; Aspirasi Mahasiswa 2020</small>
     </div>
   </section>
 

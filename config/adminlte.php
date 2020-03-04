@@ -173,14 +173,14 @@ return [
     */
 
     'menu' => [
-        [
-            'text' => 'search',
-            'search' => true,
-            'topnav' => true,
-            'href' => 'test',  //form action
-            'method' => 'POST', //form method
-            'input_name' => 'menu-search-input', //input name
-        ],
+        // [
+        //     'text' => 'search',
+        //     'search' => true,
+        //     'topnav' => true,
+        //     'href' => 'test',  //form action
+        //     'method' => 'POST', //form method
+        //     'input_name' => 'menu-search-input', //input name
+        // ],
         [
             'text' => 'Dashboard',
             'url'  => 'home',
@@ -220,11 +220,11 @@ return [
                     'url'  => '/admin-setting',
                     'icon' => 'fas fa-fw fa-user',
                 ],
-                [
-                    'text' => 'Ubah Password',
-                    'url'  => '/ubah-password',
-                    'icon' => 'fas fa-fw fa-lock',
-                ],
+                // [
+                //     'text' => 'Ubah Password',
+                //     'url'  => '/ubah-password',
+                //     'icon' => 'fas fa-fw fa-lock',
+                // ],
             ],
         ],
     ],
